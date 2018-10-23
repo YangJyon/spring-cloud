@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: gateway-zuul-regexp
+server:
+  port: 7501
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

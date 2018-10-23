@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: consumer-movie-feign-customizing
+server:
+  port: 7801
+
+eureka:
+  healthcheck:
+    enabled: true
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+logging:
+  level:
+    com.jyon.cloud.feign.UserFeignClient: DEBUG
+
+
+#第一次访问超时解决方法：
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000   #超时时间改为5秒
+hystrix.command.default.execution.timeout.enabled: false    #禁用Hystrix的超时时间
+#feign.hystrix.enabled: false     #禁用feign的hystrix，不推荐

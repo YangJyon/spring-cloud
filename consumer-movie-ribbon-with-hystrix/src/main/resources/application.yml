@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: consumer-movie-ribbon-with-hystrix
+server:
+  port: 7801
+eureka:
+  healthcheck:
+    enabled: true
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}

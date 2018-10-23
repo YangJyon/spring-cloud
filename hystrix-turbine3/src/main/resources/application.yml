@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: hystrix-turbine3
+server:
+  port: 7603
+
+eureka:
+  healthcheck:
+    enabled: true
+  client:
+    serviceUrl:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10     #租期更新时间间隔（默认30秒）
+    leaseExpirationDurationInSeconds: 30  #租期到期时间（默认90秒）
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+
+turbine:
+  aggregator:
+    clusterConfig: CONSUMER-MOVIE-RIBBON-WITH-HYSTRIX3
+  appConfig: consumer-movie-ribbon-with-hystrix3
+
+logging:
+  level:
+    root: info
+    com.netflix.turbine.monitor: debug
